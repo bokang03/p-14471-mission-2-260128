@@ -26,8 +26,41 @@ public class App {
                 actionWrite();
             } else if (cmd.equals("목록")) {
                 actionList();
+            } else if (cmd.startsWith("삭제")) {
+                actionDelete(cmd);
             }
         }
+    }
+
+
+    private void actionDelete(String cmd) {
+        String idStr = cmd.split("=")[1];
+        int id = Integer.parseInt(idStr);
+
+        boolean rst = delete(id);
+
+        System.out.println("%d번 명언이 삭제되었습니다.".formatted(id));
+    }
+
+    private boolean delete(int deleteTarget) {
+
+        int foundIndex = -1;
+
+        for (int i = 0; i <= lastWiseSayingIndex; i++){
+            WiseSaying foundWisaying = wiseSayings[i];
+            if(deleteTarget == foundWisaying.id) {
+                foundIndex = i;
+            }
+        }
+
+        if (foundIndex == -1) return false;
+
+        for(int i = foundIndex; i < lastWiseSayingIndex; i++) {
+            wiseSayings[i] = wiseSayings[i + 1];
+        }
+
+        lastWiseSayingIndex--;
+        return true;
     }
 
     private void actionList() {
@@ -59,7 +92,7 @@ public class App {
         String author = sc.nextLine();
 
         write(content, author);
-        System.out.println(lastId + "번 명언이 등록되었습니다.");
+        System.out.println("%d번 명언이 등록되었습니다.".formatted(lastId));
     }
 
     private void write(String content, String author) {
