@@ -3,6 +3,9 @@ package org.example;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class App {
 
 
@@ -26,26 +29,32 @@ public class App {
             }
             else if(cmd.equals("목록")){
                 actionList();
-                }
             }
         }
+    }
 
     private void actionList() {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
         for (int i=wiseSayings.size()-1; i >= 0; i--){
             System.out.println(wiseSayings.get(i).id + " / " + wiseSayings.get(i).author + " / " + wiseSayings.get(i).content);
+        }
     }
-}
 
     private void actionWrite() {
-        ++id;
+
         System.out.print("명언 : ");
         String content = sc.nextLine();
         System.out.print("작가 : ");
         String author = sc.nextLine();
-        System.out.println(id + "번 명언이 등록되었습니다.");
 
+        write(content, author);
+
+        System.out.println(id + "번 명언이 등록되었습니다.");
+    }
+
+    private void write(String content, String author){
+        ++id;
         wiseSayings.add(new WiseSaying(id, content, author));
     }
 }
