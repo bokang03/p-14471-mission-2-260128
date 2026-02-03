@@ -6,14 +6,13 @@ import java.util.Scanner;
 
 public class App {
 
-    Scanner sc = new Scanner(System.in);
-    int lastId = 0;
+    private Scanner sc = new Scanner(System.in);
+    private int lastId = 0;
 
-    WiseSaying[] wiseSayings = new WiseSaying[10];
-    int lastWiseSayingIndex = -1;
+    private WiseSaying[] wiseSayings = new WiseSaying[10];
+    private int lastWiseSayingIndex = -1;
 
     public void run() {
-
         System.out.println("== 명언 앱 ==");
 
         while (true) {
@@ -45,13 +44,12 @@ public class App {
             return;
         }
 
-        System.out.println("명언(기존) : " + wiseSaying.content);
+        System.out.println("명언(기존) : " + wiseSaying.getContent());
         System.out.print("명언 : ");
-        wiseSaying.content = sc.nextLine();
-        System.out.println("작가(기존) : " + wiseSaying.author);
+        wiseSaying.setContent(sc.nextLine());
+        System.out.println("작가(기존) : " + wiseSaying.getAuthor());
         System.out.print("작가 : ");
-        wiseSaying.author = sc.nextLine();
-
+        wiseSaying.setAuthor(sc.nextLine());
     }
 
     private WiseSaying findById(int modifyTarget) {
@@ -66,7 +64,7 @@ public class App {
     private int findIndexById(int id){
         for (int i = 0; i <= lastWiseSayingIndex; i++){
             WiseSaying foundWisaying = wiseSayings[i];
-            if(id == foundWisaying.id) {
+            if(id == foundWisaying.getId()) {
                 return i;
             }
         }
@@ -106,7 +104,7 @@ public class App {
         List<WiseSaying> wiseSayingList = findList();
 
         for(WiseSaying wiseSaying : wiseSayingList) {
-            System.out.printf("%d / %s / %s\n", wiseSaying.id, wiseSaying.author, wiseSaying.content);
+            System.out.printf("%d / %s / %s\n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent());
         }
     }
 
