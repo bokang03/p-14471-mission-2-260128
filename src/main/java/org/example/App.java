@@ -34,6 +34,40 @@ public class App {
         }
     }
 
+    private void actionModify(String cmd) {
+        String idStr = cmd.split("=")[1];
+        int id = Integer.parseInt(idStr);
+
+        WiseSaying wiseSaying = findById(id);
+
+        if (wiseSaying == null) {
+            System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
+            return;
+        }
+
+        System.out.println("명언(기존) : " + wiseSaying.content);
+        System.out.print("명언 : ");
+        wiseSaying.content = sc.nextLine();
+        System.out.println("작가(기존) : " + wiseSaying.author);
+        System.out.print("작가 : ");
+        wiseSaying.author = sc.nextLine();
+
+    }
+
+    private WiseSaying findById(int modifyTarget) {
+        int foundIndex = -1;
+
+        for (int i = 0; i <= lastWiseSayingIndex; i++){
+            WiseSaying foundWisaying = wiseSayings[i];
+            if(modifyTarget == foundWisaying.id) {
+                foundIndex = i;
+                WiseSaying wiseSaying = wiseSayings[foundIndex];
+                return wiseSaying;
+            }
+        }
+        return null;
+    }
+
     private void actionDelete(String cmd) {
         String idStr = cmd.split("=")[1];
         int id = Integer.parseInt(idStr);
